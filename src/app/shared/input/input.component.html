@@ -1,0 +1,27 @@
+<input
+  [formControl]="control"
+  [type]="type"
+  class="block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400"
+  [placeholder]="placeholder"
+  [mask]="format"
+  [dropSpecialCharacters]="false"
+/>
+<ng-container *ngIf="control.touched && control.dirty">
+  <p class="text-red-400" *ngIf="control.errors?.['pattern']">
+    至少8個字符 必須包含至少 1 個大寫字母、1 個小寫字母和 1 個數字
+    可以包含特殊字符
+  </p>
+  <p *ngIf="control.errors?.['required']" class="text-red-400">需要填寫</p>
+  <p *ngIf="control.errors?.['minlength']" class="text-red-400">
+    填了{{control.errors?.['minlength']['actualLength']}}個字，至少要3個字
+  </p>
+  <p *ngIf="control.errors?.['email']" class="text-red-400">
+    必須輸入有效的Email
+  </p>
+  <p *ngIf="control.errors?.['min']" class="text-red-400">低於最小年齡</p>
+  <p *ngIf="control.errors?.['max']" class="text-red-400">高於最大年齡</p>
+  <p *ngIf="control.errors?.['noMatch']" class="text-red-400">密碼不相符</p>
+  <p *ngIf="control.errors?.['emailTaken']" class="text-red-400">
+    該Email 已使用過，請更換一個
+  </p>
+</ng-container>
